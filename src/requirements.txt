@@ -1,0 +1,7 @@
+Flask
+Flask-Cors
+Flask-Login
+Marshmallow
+SqlAlchemy
+Psycopg2-Binary
+Flask-Classy

@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+  back:
+    container_name: intell-back
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    restart: always
+    ports:
+      - 5000:5000
