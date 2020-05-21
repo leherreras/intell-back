@@ -10,6 +10,13 @@ def create_user_platform(data):
     user.set_password(data['password'])
 
     session = Session()
+
+    user_objects = session.query(User).filter_by(username=data['username']).limit(1)
+    schema = UserSchema(many=True)
+    user_old = schema.dump(user_objects)
+    if user_old:
+        return
+
     session.add(user)
     session.commit()
 

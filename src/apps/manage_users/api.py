@@ -1,5 +1,5 @@
 import flask_login
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from flask_classy import FlaskView
 
 from .controller import create_user_platform, get_user, get_users
@@ -11,7 +11,9 @@ class UserView(FlaskView):
     def post(self):
         data = request.form.to_dict()
         message = create_user_platform(data)
-        return jsonify(message)
+        if message:
+            return jsonify(message)
+        abort(409)
 
     def get(self, username):
         """

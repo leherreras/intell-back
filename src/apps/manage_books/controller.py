@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from entities import Session
 from entities.books import Book, BookSchema
 from entities.comments import CommentSchema, Comment
@@ -50,6 +52,7 @@ def get_book(title):
 
 
 def create_book_platform(data):
+    data['publication_date'] = str(datetime.strptime(data['publication_date'], "%Y-%m-%d"))
     posted_book = BookSchema(only=('title', 'publication_date')) \
         .load(data)
 

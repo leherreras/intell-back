@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from flask_classy import FlaskView
 
 from .controller import authenticate
@@ -13,12 +13,10 @@ class LoginView(FlaskView):
         """
         result = authenticate(request.form.get('username'), request.form.get('password'))
         if result:
-            message = {"info": "Welcome"}
-
-            return jsonify(message)
+            result.pop('password')
+            return jsonify(result)
         else:
-            message = {"error": "Invalid credentials."}
-            return jsonify(message)
+            return abort(401)
 
 # class LogoutView(FlaskView):
 #     decorators = [flask_login.login_required]

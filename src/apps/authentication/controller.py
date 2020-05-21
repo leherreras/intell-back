@@ -16,8 +16,8 @@ def authenticate(username, password):
     session.close()
     if not user:
         return None
-    user = User(**user[0])
-    if user.check_password(password):
-        flask_login.login_user(user)
-        return user
-    return user
+    user_internal = User(**user[0])
+    if user_internal.check_password(password):
+        flask_login.login_user(user_internal)
+        return user[0]
+

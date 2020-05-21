@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, url_for, redirect
+from flask_cors import CORS
 from flask_login import LoginManager
 
 from apps.authentication.api import LoginView
@@ -8,6 +9,7 @@ from comming.install import first_user
 from entities import Base, engine
 
 app = Flask(__name__)
+CORS(app)
 
 app.secret_key = b'_6#y2L"F4Q9z\n\xec]/'
 
@@ -21,8 +23,8 @@ first_user()
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def root():
+    return redirect(url_for("BookView:index"))
 
 
 LoginView.register(app)
